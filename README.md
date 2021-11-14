@@ -1,4 +1,4 @@
-### Cheers to the first of many projects, that will be created by yours truly, from a desire to upskill myself
+### Cheers to the first of many projects, that will be created by yours truly, from a desire to upskill himself
 
 Design is from [devchallenges](https://devchallenges.io/challenges/hH6PbOHBdPm6otzw2De5)
 

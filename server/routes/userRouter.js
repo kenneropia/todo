@@ -10,7 +10,7 @@ const signToken = (user) =>
     expiresIn: process.env.JWT_EXPIRES_IN,
   })
 
-router.get('/signup', async (req, res, next) => {
+router.post('/signup', async (req, res, next) => {
   const userDetails = {
     username: req.body.username,
     email: req.body.email,
@@ -26,26 +26,25 @@ router.get('/signup', async (req, res, next) => {
   res.json({ data: { user: newUser } })
 })
 
-router.get('/login', async (req, res, next) => {
-  const { username, email, password } = req.body
+router.post('/login', async (req, res, next) => {
+  console.log(req.body)
+  const { email = '', password = '' } = req.body
   let user = null
   if (email && email.includes('@')) {
     user = await User.findOne({ email }).select('+password')
   }
-  if (username) {
-    user = await User.findOne({ username }).select('+password')
-  }
 
-  const isCorrectPassword = await User.correctPassword(password, user.password)
-  user.password = null
-  if (!user || !isCorrectPassword) {
-    res.json({
+  if (!user || !(await User.correctPassword(password, user.password))) {
+    return res.status(401).json({
       error: {
         status: 401,
         message: 'Your email or username is incorrect',
       },
     })
   }
+
+  user.password = null
+
   const token = signToken(user)
   res.json({ token, data: { user } })
 })

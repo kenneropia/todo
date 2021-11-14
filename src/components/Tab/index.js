@@ -3,12 +3,12 @@ import TabList from './TabList'
 import TabPanel from './TabPanel'
 
 function Tab() {
-  const [currentTab, setCurrentTab] = useState('All')
-  console.log(currentTab)
+  const [currentTab, setCurrentTab] = useState('all')
+
   return (
     <>
       <TabList currentTab={currentTab} setCurrentTab={setCurrentTab} />
-      <TabPanel />
+      <TabPanel currentTab={currentTab} />
     </>
   )
 }

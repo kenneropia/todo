@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const noteSchema = mongoose.Schema({
+const todoSchema = mongoose.Schema({
   text: {
     type: String,
     maxlength: 75,
@@ -25,18 +25,18 @@ const noteSchema = mongoose.Schema({
   updatedAt: Date,
 })
 
-noteSchema.pre('save', async function (next) {
+todoSchema.pre('save', async function (next) {
   this.createdAt = Date.now()
   next()
 })
 
-noteSchema.post('updateOne', async function (next) {
+todoSchema.post('updateOne', async function (next) {
   delete this.createdAt
   this.updatedAt = Date.now()
   next()
 })
 
-noteSchema.set('toJSON', {
+todoSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -44,8 +44,8 @@ noteSchema.set('toJSON', {
   },
 })
 
-noteSchema.statics.noteValidator = require('./noteValidator')
+todoSchema.statics.noteValidator = require('./todoValidator')
 
-const Note = mongoose.model('Note', noteSchema)
+const Todo = mongoose.model('Todo', todoSchema)
 
-module.exports = Note
+module.exports = Todo

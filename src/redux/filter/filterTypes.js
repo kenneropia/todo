@@ -1,0 +1,3 @@
+export const SET_TEXT_FILTER = 'SET_TEXT_FILTER'
+export const SORT_BY_CREATED = 'SORT_BY_CREATED'
+export const SORT_BY_UPDATED = 'SORT_BY_UPDATED'

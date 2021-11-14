@@ -2,7 +2,7 @@ const express = require('express')
 require('express-async-errors')
 const app = express()
 const userRouter = require('./routes/userRouter')
-const noteRouter = require('./routes/noteRouter')
+const todoRouter = require('./routes/todoRouter')
 const globalErrorHandler = require('./utils/globalErrorHandler')
 
 // if (process.env.NODE_ENV === 'development') {
@@ -17,7 +17,7 @@ app.get('/me', (req, res) => {
 })
 
 app.use('/api/user', userRouter)
-app.use('/api/notes', noteRouter)
+app.use('/api/todos', todoRouter)
 
 app.all('*', (req, res, next) => {
   throw Error(`Can't find ${req.originalUrl} on this server!`, 404)

@@ -1,18 +1,17 @@
 function TabList({ setCurrentTab, currentTab }) {
-  console.log(setCurrentTab)
-  const allTabPanel = ['All', 'Completed', 'Active']
+  const allTabPanel = ['all', 'active', 'completed']
+
   const changeTab = (newTab) => {
-    console.log(newTab)
-    if (newTab !== 'All' && newTab !== 'Completed' && newTab !== 'Active')
+    if (newTab !== 'all' && newTab !== 'completed' && newTab !== 'active')
       return
     if (newTab === currentTab) return
-    console.log('lolol')
+
     setCurrentTab(newTab)
   }
   return (
     <ul className="tab-list">
-      {allTabPanel.map((tab) => (
-        <li className={`${currentTab === tab ? 'active-panel' : ''}`}>
+      {allTabPanel.map((tab, id) => (
+        <li key={id} className={`${currentTab === tab ? 'active-panel' : ''}`}>
           <button onClick={() => changeTab(tab)}>{tab}</button>
         </li>
       ))}
